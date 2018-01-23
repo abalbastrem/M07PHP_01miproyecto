@@ -2,7 +2,7 @@
 
 function getProductos($con) {
     
-    echo "getting products...<br>";
+    echo "getting products....<br>";
     
     $sql = "SELECT * FROM productos";
     
