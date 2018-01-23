@@ -1,0 +1,3 @@
+INICI
+
+<?php phpinfo();?>
