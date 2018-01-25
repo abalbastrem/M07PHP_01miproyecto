@@ -4,18 +4,10 @@ class Cesta {
     
     private $id, $product_id, $cantidad, $user_id;
     
-    public function __construct($id, $product_id, $cantidad, $user_id){
-        $this->id=$id;
+    public function __construct($product_id, $cantidad, $user_id){
         $this->product_id=$product_id;
         $this->cantidad=$cantidad;
         $this->user_id=$user_id;
-    }
-    /**
-     * @return the $id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -40,14 +32,6 @@ class Cesta {
     public function getUser_id()
     {
         return $this->user_id;
-    }
-
-    /**
-     * @param field_type $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
