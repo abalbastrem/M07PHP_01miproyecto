@@ -7,9 +7,12 @@ class Conectar{
     public function __construct(){
         $config  = require_once '../config/config.php';
         $this->host = $config['host'];
+        $this->db = $config['db'];
         $this->user = $config['user'];
         $this->pass = $config['password'];
-        $this->db = $config['db'];
+        $this->dbname = $config['dbname'];
+        $this->dsn = $this->db . ":" . "host=" . $this->host . ";" . "dbname=" . $this->dbname;
+        echo $this->dsn;
 //         echo "<br>host ".$this->host;
 //         echo "<br>user ".$this->user;
 //         echo "<br>pass ".$this->pass;
@@ -17,15 +20,18 @@ class Conectar{
     }
 
     public function getConnexion(){        
-        $con=new mysqli($this->host,$this->user,$this->pass,$this->db);
-        
+//         $con=new mysqli($this->host,$this->user,$this->pass,$this->db);
+
         // catch errors de connexió
-        if ( $con->connect_error ) {
-            die ("Fallo en la conexión " . $con -> connect_error);
-        } else {
-            echo "Conexión establecida<br>";
-        }
-        
+//         if ( $con->connect_error ) {
+//             die ("Fallo en la conexión " . $con -> connect_error);
+//         } else {
+//             echo "Conexión establecida<br>";
+//         }
+
+        $con = new PDO($this->dsn, $this->user, $this->pass);
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         return $con;
     }
 
