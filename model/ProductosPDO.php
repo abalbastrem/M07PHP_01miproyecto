@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 function getProductos($con) {
     require_once '../bean/Producto.php';
@@ -10,7 +9,11 @@ function getProductos($con) {
     
     $stmt = $con->prepare($sql);
     $stmt->execute();
-    $stmt->bind_result($id,$name,$descripcion,$precio);
+    $stmt->bindColumn(1,$id);
+    $stmt->bindColumn(2,$name);
+    $stmt->bindColumn(3,$descripcion);
+    $stmt->bindColumn(4,$precio);
+//     $stmt->bind_result($id,$name,$descripcion,$precio); // Només per mysqli
 
     // BUILD TABLE OF PRODUCTS
     echo "<table>";
@@ -40,25 +43,5 @@ function getProductos($con) {
 
 }
 
-function producto2cesta($cesta,$con) {
-    require_once '../bean/Cesta.php';
-    
-    echo "añadiendo producto a cesta...<br>";
-    
-    $sql = "INSERT INTO cesta (product_id, cantidad, user_id) VALUES (:product_id, :cantidad, :user_id)";
-    
-    $stmt = $con->prepare($sql);
-    $stmt->bindParam(':product_id',$cesta->getProduct_id());
-    $stmt->bindParam(':cantidad',$cesta->getCantidad());
-    $stmt->bindParam(':user_id',$cesta->getUser_id());
-    
-    $stmt->execute();
-    
-    echo "producto añadido.<br>";
-    
-    // TERMINATES
-    $stmt->free_result();
-    $con->close();
-}
 
 ?>

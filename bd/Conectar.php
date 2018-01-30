@@ -12,7 +12,7 @@ class Conectar{
         $this->pass = $config['password'];
         $this->dbname = $config['dbname'];
         $this->dsn = $this->db . ":" . "host=" . $this->host . ";" . "dbname=" . $this->dbname;
-        echo $this->dsn;
+//         echo $this->dsn;
 //         echo "<br>host ".$this->host;
 //         echo "<br>user ".$this->user;
 //         echo "<br>pass ".$this->pass;

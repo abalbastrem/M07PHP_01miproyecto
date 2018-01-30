@@ -8,5 +8,5 @@ session_start();
 
 $connectar = new Conectar();
 $con = $connectar->getConnexion();
-getProductos($con);
+getCesta($con);
 $con->close();
