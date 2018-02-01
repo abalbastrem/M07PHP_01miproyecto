@@ -1,5 +1,29 @@
 <?php
 
+function get_user($name2check,$password2check,$con) {
+    
+    echo "getting user profile...<br>";
+    
+    // Comparamos el formulario con la TABLE 'users' de la BBDD
+    $sql = "SELECT * FROM users WHERE name=:name AND password = md5(:password) LIMIT 1";
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':name', $name2check);
+    $stmt->bindParam(':password', $password2check);
+    $stmt->execute();
+    
+    
+    
+    $stmt->bindColumn(1,$id);
+    $stmt->bindColumn(2,$email);
+    $stmt->bindColumn(3,$name);
+    $stmt->bindColumn(4,$password);
+    
+    echo "check";
+    
+    return $stmt;
+    
+}
+
 function new_user($name,$email,$password,$con) {
     
     echo "inserting new user...<br>";

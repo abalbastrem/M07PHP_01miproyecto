@@ -1,4 +1,5 @@
 <?php
+require_once '../model/UserPDO.php';
 require_once '../bean/Usuario.php';
 require_once '../bd/Conectar.php';
 
@@ -6,16 +7,18 @@ $conectar = new Conectar();
 $con = $conectar->getConnexion();
 
 // Comparamos el formulario con la TABLE 'users' de la BBDD
-$sql = "SELECT * FROM users WHERE name=:username AND password = md5(:password) LIMIT 1";
-$stmt = $con->prepare($sql);
-$stmt->bindParam(':username', $_POST['user']);
-$stmt->bindParam(':password', $_POST['pass']);
-$stmt->execute();
+// $sql = "SELECT * FROM users WHERE name=:username AND password = md5(:password) LIMIT 1";
+// $stmt = $con->prepare($sql);
+// $stmt->bindParam(':username', $_POST['user']);
+// $stmt->bindParam(':password', $_POST['pass']);
+// $stmt->execute();
 
-$stmt->bindColumn(1,$id);
-$stmt->bindColumn(2,$email);
-$stmt->bindColumn(3,$name);
-$stmt->bindColumn(4,$password);
+// $stmt->bindColumn(1,$id);
+// $stmt->bindColumn(2,$email);
+// $stmt->bindColumn(3,$name);
+// $stmt->bindColumn(4,$password);
+
+$stmt = get_user($_POST['user'], $_POST['pass'], $con);
 
 while ($stmt->fetch()) {
     $user = new Usuario($id, $name, $email, $password);
