@@ -18,7 +18,6 @@ function producto2cesta($cesta,$con) {
     
     // TERMINATES
     $stmt->free_result();
-    $con->close();
 }
 
 function getCesta($con) {
@@ -49,9 +48,13 @@ function getCesta($con) {
         
         $cesta = new Cesta($product_id, $cantidad, $user_id);
         
-        echo "<tr>";
+        echo "<tr><form action='../control/controller.php' method='post'>";
         echo "<td>" . $cesta->getProduct_id() . "</td>";
         echo "<td>" . $cesta->getCantidad() . "</td>";
+        echo "<td> <input type='hidden' name='form' value='deleteFromCesta'>";
+        echo "<input type='hidden' name='product_id' value='" . $cesta->getProduct_id() . "'>";
+        echo "<input type='hidden' name='user_id' value='" . $cesta->getUser_id() . "'>";
+        echo "<button type='submit' name='delete' >Borrar producto</button>" . "</td>";
         echo "</form>";
         echo "</tr>";
     }
@@ -64,6 +67,31 @@ function getCesta($con) {
     
     $stmt->free_result();
     
+}
+
+function deleteProductFromCesta($user_id,$product_id,$con) {
+    echo "deleting product from your shopping cart...<br>";
+    
+    $sql = "DELETE FROM cesta WHERE product_id=:pid AND user_id=:uid";
+    
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':uid',$user_id);
+    $stmt->bindParam(':pid',$product_id);
+    $stmt->execute();
+    
+    $stmt->free_result();
+}
+
+function deleteCesta($user_id,$con) {
+    echo "deleting shopping cart...";
+    
+    $sql = "DELETE FROM cesta WHERE user_id=:uid";
+        
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':uid',$user_id);
+    $stmt->execute();
+    
+    $stmt->free_result();
 }
 
 ?>

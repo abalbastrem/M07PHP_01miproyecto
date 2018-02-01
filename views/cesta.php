@@ -9,4 +9,5 @@ session_start();
 $connectar = new Conectar();
 $con = $connectar->getConnexion();
 getCesta($con);
+
 $con->close();

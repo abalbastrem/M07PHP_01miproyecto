@@ -1,18 +1,24 @@
 <?php
 
-function new_user($username,$email,$password,$con) {
+function new_user($name,$email,$password,$con) {
     
     echo "inserting new user...<br>";
     
-    $insert = "INSERT INTO users(email, name, password) VALUES ('".$email."','".$username."',md5('".$password."'))";
+    $sql = "INSERT INTO users(email, name, password) VALUES (:email,:name,md5(:password))";
+    
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':name',$name);
+    $stmt->bindParam(':email',$email);
+    $stmt->bindParam(':password',$password);
+    
+    $stmt->execute();
 
-    if ( $con->query($insert) === TRUE ) {
-        echo "OK<br> Pots anar al login";
-        header("location: ../views/form_login.php");
-    } else {
-        echo "Error: " . $con->error;
-    }   
-    echo "check";
+    // COMPRUEBA SI HA HABIDO ROWS AFECTADOS
+    if ($stmt->rowCount()){
+        echo 'Success: At least 1 row was affected.';
+    } else{
+        echo 'Failure: 0 rows were affected.';
+    }
         
 }
 
@@ -21,23 +27,46 @@ function delete_user($user,$con) {
     
     echo "deleting user " . $user->getName() . "...";
     
-    $sql = "DELETE FROM users WHERE name='" . $user->getName() . "'";
-    if ( $con->query($sql) === TRUE )
-        echo "OK: user deleted";
-        else
-            echo "Error: " . $con->error;
+    $sql = "DELETE FROM users WHERE name=:name AND password=:password";
+    
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':name',$user->getName());
+    $stmt->bindParam(':password',$user->getPassword());
+    
+    $stmt->execute();
+    
+    // COMPRUEBA SI HA HABIDO ROWS AFECTADOS
+    if ($stmt->rowCount()){
+        echo 'Success: At least 1 row was affected.';
+    } else{
+        echo 'Failure: 0 rows were affected.';
+    }
+    
+//     if ( $con->query($sql) === TRUE )
+//         echo "OK: user deleted";
+//         else
+//             echo "Error: " . $con->error;
 }
 
 function edit_user($user,$newemail,$newpassword,$con) {
     
     echo "editing user " . $user->getName() . "...";
+
+    $sql = "UPDATE users SET email=:newemail, password=md5(:newpassword) WHERE name=:name AND password=:password";
     
-    $sql = "UPDATE users SET email = '$newemail', password = md5('$newpassword') WHERE name='" . $user->getName() . "' AND password = '" . $user->getPassword() . "'";
-    if ( $con->query($sql) === TRUE ) {
-        echo "OK: user deleted";
-        session_start();
-    } else {
-        echo "Error: " . $con->error;
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':newemail',$newemail);
+    $stmt->bindParam(':newpassword',$newpassword);
+    $stmt->bindParam(':name',$user->getName());
+    $stmt->bindParam(':password',$user->getPassword());
+    
+    $stmt->execute();
+    
+    // COMPRUEBA SI HA HABIDO ROWS AFECTADOS
+    if ($stmt->rowCount()){
+        echo 'Success: At least 1 row was affected.';
+    } else{
+        echo 'Failure: 0 rows were affected.';
     }
 }
 

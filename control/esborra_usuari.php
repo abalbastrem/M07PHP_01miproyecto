@@ -13,9 +13,11 @@ echo "current user: " . $_SESSION['login_user']->getName() . "<br>";
 $connectar = new Conectar();
 $con = $connectar->getConnexion();
     
-$user = $_SESSION['login_user'];
+delete_user($_SESSION['login_user'],$con);
 
-delete_user($user,$con);
+$_SESSION['login_user'] = null;
+
+session_abort();
     
 $con->close();
 

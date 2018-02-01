@@ -19,7 +19,16 @@ switch ($_POST['form']) {
         $cesta = new Cesta($_POST['id_producto'], $_POST['quant'], $_SESSION['login_user']->getId());
         echo "user: " . $cesta->getUser_id() . " id producto: " . $cesta->getProduct_id() . " cantidad: " . $cesta->getCantidad() . "<br>";
         producto2cesta($cesta,$con);
+        $con->close();
         echo "producto2cesta successful.<br>";
+        break;
+        
+    case deleteFromCesta:
+        echo "deleting specified order...";
+        $connectar = new Conectar();
+        $con = $connectar->getConnexion();
+        deleteProductFromCesta($_POST[user_id],$_POST[product_id],$con);
+        $con->close();
         break;
         
     case deleteCesta:
@@ -27,6 +36,8 @@ switch ($_POST['form']) {
         $connectar = new Conectar();
         $con = $connectar->getConnexion();
         deleteCesta($_POST[user_id],$con);
+        $con->close();
+        break;
 
     case othercase:
         echo "post no especificado correctamente";
