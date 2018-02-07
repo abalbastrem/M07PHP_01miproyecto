@@ -6,49 +6,23 @@ require_once '../bd/Conectar.php';
 $conectar = new Conectar();
 $con = $conectar->getConnexion();
 
-// Comparamos el formulario con la TABLE 'users' de la BBDD
-// $sql = "SELECT * FROM users WHERE name=:username AND password = md5(:password) LIMIT 1";
-$sql = "SELECT * FROM users";
-$stmt = $con->prepare($sql);
-// $stmt->bindParam(':username', $_POST['user']);
-// $stmt->bindParam(':password', $_POST['pass']);
-$stmt->execute();
-
-$stmt->bindColumn(1,$id);
-$stmt->bindColumn(2,$name);
-$stmt->bindColumn(3,$email);
-$stmt->bindColumn(4,$password);
+$stmt = get_user($_POST['user'], $_POST['pass'], $con);
 
 while ($stmt->fetch()) {
-
-echo "id: " . $id;
-echo "name: " . $name;
-echo "email: " . $email;
-echo "password: " . $password;
-
-$user = new Usuario($id, $name, $email, $password);
-print_r($user);
-
-echo "<br>session:<br>";
-echo $user->getId()."<br>";
-echo $user->getName()."<br>";
-echo $user->getEmail()."<br>";
-echo $user->getPassword()."<br>";
-
-}
-
-// $stmt = get_user($_POST['user'], $_POST['pass'], $con);
-
-// while ($stmt->fetch()) {
-//     echo "inside fetch";
-//     $_SESSION['login_user'] = new Usuario($id, $name, $email, $password);
+    echo "inside fetch";
+    echo $id;
+    echo $name;
+    echo $email;
+    echo $password;
     
-//     echo "<br>session:<br>";
-//     echo $_SESSION['login_user']->getId()."<br>";
-//     echo $_SESSION['login_user']->getName()."<br>";
-//     echo $_SESSION['login_user']->getEmail()."<br>";
-//     echo $_SESSION['login_user']->getPassword()."<br>";
-// }
+    $user = new Usuario($id, $name, $email, $password);
+    
+    echo "<br>session:<br>";
+    echo $user->getId()."<br>";
+    echo $user->getName()."<br>";
+    echo $user->getEmail()."<br>";
+    echo $user->getPassword()."<br>";
+}
 
 // CON MYSQLI
 // $result = $con->query($sql);

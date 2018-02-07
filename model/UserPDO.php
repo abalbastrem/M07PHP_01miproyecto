@@ -5,19 +5,33 @@ function get_user($name2check,$password2check,$con) {
     echo "getting user profile...<br>";
     
     // Comparamos el formulario con la TABLE 'users' de la BBDD
-    $sql = "SELECT * FROM users WHERE name=:name AND password = md5(:password) LIMIT 1";
+    $sql = "SELECT * FROM users WHERE name=:username AND password = md5(:password) LIMIT 1";
     $stmt = $con->prepare($sql);
-    $stmt->bindParam(':name', $name2check);
+    $stmt->bindParam(':username', $name2check);
     $stmt->bindParam(':password', $password2check);
     $stmt->execute();
     
+    echo $name2check;
+    echo $password2check;
+    
     $stmt->bindColumn(1,$id);
-    $stmt->bindColumn(2,$email);
-    $stmt->bindColumn(3,$name);
+    $stmt->bindColumn(2,$name);
+    $stmt->bindColumn(3,$email);
     $stmt->bindColumn(4,$password);
     
-    echo "inside getuser:<br>";
-    echo print_r($stmt) . "<br>";
+    while ($stmt->fetch()) {
+    
+        echo "inside fetch";
+    
+        $user = new Usuario($id, $name, $email, $password);
+    
+        echo "<br>session:<br>";
+        echo $user->getId()."<br>";
+        echo $user->getName()."<br>";
+        echo $user->getEmail()."<br>";
+        echo $user->getPassword()."<br>";
+    
+    }
     
     return $stmt;
     

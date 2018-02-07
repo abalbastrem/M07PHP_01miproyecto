@@ -9,11 +9,6 @@ class Usuario{
         $this->name=$name;
         $this->email=$email;
         $this->password=$password;
-        
-        echo $this->id . "<br>";
-        echo $this->name . "<br>";
-        echo $this->email . "<br>";
-        echo $this->password . "<br>";
     }
     
     // ************ Getters & Setters ************
