@@ -11,14 +11,13 @@ function get_user($name2check,$password2check,$con) {
     $stmt->bindParam(':password', $password2check);
     $stmt->execute();
     
-    
-    
     $stmt->bindColumn(1,$id);
     $stmt->bindColumn(2,$email);
     $stmt->bindColumn(3,$name);
     $stmt->bindColumn(4,$password);
     
-    echo "check";
+    echo "inside getuser:<br>";
+    echo print_r($stmt) . "<br>";
     
     return $stmt;
     

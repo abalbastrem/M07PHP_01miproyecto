@@ -8,29 +8,47 @@ $con = $conectar->getConnexion();
 
 // Comparamos el formulario con la TABLE 'users' de la BBDD
 // $sql = "SELECT * FROM users WHERE name=:username AND password = md5(:password) LIMIT 1";
-// $stmt = $con->prepare($sql);
+$sql = "SELECT * FROM users";
+$stmt = $con->prepare($sql);
 // $stmt->bindParam(':username', $_POST['user']);
 // $stmt->bindParam(':password', $_POST['pass']);
-// $stmt->execute();
+$stmt->execute();
 
-// $stmt->bindColumn(1,$id);
-// $stmt->bindColumn(2,$email);
-// $stmt->bindColumn(3,$name);
-// $stmt->bindColumn(4,$password);
-
-$stmt = get_user($_POST['user'], $_POST['pass'], $con);
+$stmt->bindColumn(1,$id);
+$stmt->bindColumn(2,$name);
+$stmt->bindColumn(3,$email);
+$stmt->bindColumn(4,$password);
 
 while ($stmt->fetch()) {
-    $user = new Usuario($id, $name, $email, $password);
-    session_start();
-    $_SESSION['login_user'] = $user;
+
+echo "id: " . $id;
+echo "name: " . $name;
+echo "email: " . $email;
+echo "password: " . $password;
+
+$user = new Usuario($id, $name, $email, $password);
+print_r($user);
+
+echo "<br>session:<br>";
+echo $user->getId()."<br>";
+echo $user->getName()."<br>";
+echo $user->getEmail()."<br>";
+echo $user->getPassword()."<br>";
+
+}
+
+// $stmt = get_user($_POST['user'], $_POST['pass'], $con);
+
+// while ($stmt->fetch()) {
+//     echo "inside fetch";
+//     $_SESSION['login_user'] = new Usuario($id, $name, $email, $password);
     
 //     echo "<br>session:<br>";
 //     echo $_SESSION['login_user']->getId()."<br>";
 //     echo $_SESSION['login_user']->getName()."<br>";
 //     echo $_SESSION['login_user']->getEmail()."<br>";
 //     echo $_SESSION['login_user']->getPassword()."<br>";
-}
+// }
 
 // CON MYSQLI
 // $result = $con->query($sql);

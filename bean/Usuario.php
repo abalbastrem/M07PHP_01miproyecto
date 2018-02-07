@@ -2,13 +2,18 @@
 
 class Usuario{
     
-    private $email, $name, $password, $id;
+    private $id, $name, $email, $password;
     
     public function __construct($id, $name, $email, $password){
         $this->id=$id;
         $this->name=$name;
         $this->email=$email;
         $this->password=$password;
+        
+        echo $this->id . "<br>";
+        echo $this->name . "<br>";
+        echo $this->email . "<br>";
+        echo $this->password . "<br>";
     }
     
     // ************ Getters & Setters ************
