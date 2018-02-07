@@ -19,7 +19,7 @@ function get_user($name2check,$password2check,$con) {
     $stmt->bindColumn(3,$email);
     $stmt->bindColumn(4,$password);
     
-    while ($stmt->fetch()) {
+    while ($stmt->fetch()) { // Mi objetivo es quitar este while para hacerlo en validar_login
     
         echo "inside fetch";
     
