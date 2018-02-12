@@ -19,7 +19,7 @@ function get_user($name2check,$password2check,$con) {
     $stmt->bindColumn(3,$email);
     $stmt->bindColumn(4,$password);
     
-    while ($stmt->fetch()) { // Mi objetivo es quitar este while para hacerlo en validar_login
+    while ($stmt->fetch()) {
     
         echo "inside fetch";
     
@@ -98,10 +98,6 @@ function delete_user($user,$con) {
         echo 'Failure: 0 rows were affected.';
     }
     
-//     if ( $con->query($sql) === TRUE )
-//         echo "OK: user deleted";
-//         else
-//             echo "Error: " . $con->error;
 }
 
 

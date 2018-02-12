@@ -13,9 +13,6 @@ function getProductos($con) {
     $stmt->bindColumn(2,$name);
     $stmt->bindColumn(3,$descripcion);
     $stmt->bindColumn(4,$precio);
-//     $stmt->bind_result($id,$name,$descripcion,$precio); // Només per mysqli
-
-//     return $stmt;
     
     // BUILD TABLE OF PRODUCTS
     echo "<table>";

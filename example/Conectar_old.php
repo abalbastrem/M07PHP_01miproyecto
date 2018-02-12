@@ -10,10 +10,6 @@ class Conectar_old{
         $this->user = $config['user'];
         $this->pass = $config['password'];
         $this->db = $config['db'];
-//         echo "<br>host ".$this->host;
-//         echo "<br>user ".$this->user;
-//         echo "<br>pass ".$this->pass;
-//         echo "<br>db ".$this->db;
     }
 
     public function getConnexion(){        
