@@ -4,11 +4,11 @@ session_start();
 
 echo "DADES DE PERFIL:<br>";
 echo "================<br><br>";
-// if ( isset($_SESSION['login_user']) ) {
-//     echo "session set";
-// } else {
-//     echo "session not set";
-// }
+if ( isset($_SESSION['login_user']) ) {
+    echo "session set";
+} else {
+    echo "session not set";
+}
 
 echo "&nbsp;ID: " . $_SESSION['login_user']->getId() . "<br>";
 echo "&nbsp;NAME: " . $_SESSION['login_user']->getName() . "<br>";

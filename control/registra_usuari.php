@@ -18,7 +18,8 @@ echo $email;
   
 
 new_user($name,$email,$password,$con);
-            
-$con->close();
 
 ?>
+<br>
+<br>
+<a href="../views/form_login.php"><< Vés al login</a>

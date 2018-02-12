@@ -19,7 +19,6 @@ switch ($_POST['form']) {
         $cesta = new Cesta($_POST['id_producto'], $_POST['quant'], $_SESSION['login_user']->getId());
         echo "user: " . $cesta->getUser_id() . " id producto: " . $cesta->getProduct_id() . " cantidad: " . $cesta->getCantidad() . "<br>";
         producto2cesta($cesta,$con);
-        $con->close();
         echo "producto2cesta successful.<br>";
         break;
         

@@ -18,17 +18,14 @@ if ( !isset($_SESSION['login_user']) ) {
     $newpassword = $_POST['newpassword'];
     $user = $_SESSION['login_user'];
 
-    edit_user($user, $newemail, $newpassword, $con);
-
-    $con->close();
-
-    // REDIRECT
-    function redirect($url, $statusCode = 303)
-    {
-        header('Location: ' . $url, true, $statusCode);
-        die();
-    }
-
-    redirect('http://localhost/miproyecto/src/views/welcome.php', false);
-       
+    $_SESSION['login_user'] = edit_user($user, $newemail, $newpassword, $con);
+    
+    echo "current profile:<br>";
+    echo "name: " . $_SESSION['login_user']->getName() . "<br>";
+    echo "email: " . $_SESSION['login_user']->getEmail() . "<br>";
 }
+?>
+
+<br>
+<br>
+<a href="../views/welcome.php"><< Menú</a>

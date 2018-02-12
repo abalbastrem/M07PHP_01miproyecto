@@ -2,7 +2,7 @@
 
 class Usuario{
     
-    private $email, $name, $password, $id;
+    private $id, $name, $email, $password;
     
     public function __construct($id, $name, $email, $password){
         $this->id=$id;
