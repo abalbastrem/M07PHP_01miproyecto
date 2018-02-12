@@ -18,7 +18,8 @@ delete_user($_SESSION['login_user'],$con);
 $_SESSION['login_user'] = null;
 
 session_abort();
-    
-$con->close();
 
 ?>
+<br>
+<br>
+<a href="../views/form_login.php"><< Vés al login</a>

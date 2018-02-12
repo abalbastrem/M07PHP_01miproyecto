@@ -6,23 +6,20 @@ require_once '../bd/Conectar.php';
 $conectar = new Conectar();
 $con = $conectar->getConnexion();
 
-$stmt = get_user($_POST['user'], $_POST['pass'], $con);
+$user = get_user($_POST['user'], $_POST['pass'], $con);
 
-while ($stmt->fetch()) {
-    echo "inside fetch";
-    echo $id;
-    echo $name;
-    echo $email;
-    echo $password;
+session_start();
+$_SESSION['login_user'] = $user;
+
+// while ($stmt->fetch()) {
+//     echo "inside fetch";
+//     echo $id;
+//     echo $name;
+//     echo $email;
+//     echo $password;
     
-    $user = new Usuario($id, $name, $email, $password);
-    
-    echo "<br>session:<br>";
-    echo $user->getId()."<br>";
-    echo $user->getName()."<br>";
-    echo $user->getEmail()."<br>";
-    echo $user->getPassword()."<br>";
-}
+//     $user = new Usuario($id, $name, $email, $password);
+// }
 
 // CON MYSQLI
 // $result = $con->query($sql);

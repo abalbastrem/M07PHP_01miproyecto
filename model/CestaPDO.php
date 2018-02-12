@@ -15,9 +15,8 @@ function producto2cesta($cesta,$con) {
     $stmt->execute();
     
     echo "producto añadido.<br>";
-    
-    // TERMINATES
-    $stmt->free_result();
+    echo "<a href='../views/productos.php'><< Torna a la taula de productes</a><br>";
+    echo "<a href='../views/cesta.php'><< Vés a la cistella</a><br>";
 }
 
 function getCesta($con) {
@@ -79,7 +78,9 @@ function deleteProductFromCesta($user_id,$product_id,$con) {
     $stmt->bindParam(':pid',$product_id);
     $stmt->execute();
     
-    $stmt->free_result();
+    echo "producto borrado.<br>";
+    echo "<a href='../views/cesta.php'><< Torna a la cistella</a><br>";
+  
 }
 
 function deleteCesta($user_id,$con) {
@@ -91,7 +92,10 @@ function deleteCesta($user_id,$con) {
     $stmt->bindParam(':uid',$user_id);
     $stmt->execute();
     
-    $stmt->free_result();
+    echo "Todos los productos borrados.<br>";
+    echo "<a href='../views/productos.php'><< Torna a la taula de productes</a><br>";
+    
+//     $stmt->free_result();
 }
 
 ?>

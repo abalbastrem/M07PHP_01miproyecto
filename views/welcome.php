@@ -11,17 +11,17 @@ if (isset($_POST['form_login'])) {
     echo "session in course<br>";
 }
 
-// if ( isset($_SESSION['login_user']) ) {
-//     if ($_SESSION['login_user']->getName()=="admin") {
-//         echo "Hola, " . $_SESSION['login_user']->getName() . "<br>";
-//         require("../admin/menu.php");
-//     } else {
-//         echo "Hola, " . $_SESSION['login_user']->getName();
-//         require("../views/snippets/menu.php");
-//     }
-// } else {
-//     echo "no hi ha login_user<br>";
-// }
+if ( isset($_SESSION['login_user']) ) {
+    if ($_SESSION['login_user']->getName()=="admin") {
+        echo "Hola, " . $_SESSION['login_user']->getName() . "<br>";
+        require("../admin/menu.php");
+    } else {
+        echo "Hola, " . $_SESSION['login_user']->getName();
+        require("../views/snippets/menu.php");
+    }
+} else {
+    echo "no hi ha login_user<br>";
+}
 
 echo "final del documento";
 

@@ -25,16 +25,35 @@ function get_user($name2check,$password2check,$con) {
     
         $user = new Usuario($id, $name, $email, $password);
     
-        echo "<br>session:<br>";
-        echo $user->getId()."<br>";
-        echo $user->getName()."<br>";
-        echo $user->getEmail()."<br>";
-        echo $user->getPassword()."<br>";
-    
     }
     
-    return $stmt;
+    return $user;
     
+}
+
+function edit_user($user,$newemail,$newpassword,$con) {
+    
+    echo "editing user " . $user->getName() . "...";
+    
+    $sql = "UPDATE users SET email=:newemail, password=md5(:newpassword) WHERE name=:name AND password=:password";
+    
+    $stmt = $con->prepare($sql);
+    $stmt->bindParam(':newemail',$newemail);
+    $stmt->bindParam(':newpassword',$newpassword);
+    $stmt->bindParam(':name',$user->getName());
+    $stmt->bindParam(':password',$user->getPassword());
+    
+    $stmt->execute();
+    
+    // COMPRUEBA SI HA HABIDO ROWS AFECTADOS
+    if ($stmt->rowCount()){
+        echo 'Success: At least 1 row was affected.';
+    } else{
+        echo 'Failure: 0 rows were affected.';
+    }
+    
+    $edited_user = get_user($user->getName(), $newpassword, $con);
+    return $edited_user;
 }
 
 function new_user($name,$email,$password,$con) {
@@ -83,28 +102,6 @@ function delete_user($user,$con) {
 //         echo "OK: user deleted";
 //         else
 //             echo "Error: " . $con->error;
-}
-
-function edit_user($user,$newemail,$newpassword,$con) {
-    
-    echo "editing user " . $user->getName() . "...";
-
-    $sql = "UPDATE users SET email=:newemail, password=md5(:newpassword) WHERE name=:name AND password=:password";
-    
-    $stmt = $con->prepare($sql);
-    $stmt->bindParam(':newemail',$newemail);
-    $stmt->bindParam(':newpassword',$newpassword);
-    $stmt->bindParam(':name',$user->getName());
-    $stmt->bindParam(':password',$user->getPassword());
-    
-    $stmt->execute();
-    
-    // COMPRUEBA SI HA HABIDO ROWS AFECTADOS
-    if ($stmt->rowCount()){
-        echo 'Success: At least 1 row was affected.';
-    } else{
-        echo 'Failure: 0 rows were affected.';
-    }
 }
 
 

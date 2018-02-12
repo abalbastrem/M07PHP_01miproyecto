@@ -39,6 +39,8 @@ function getProductos($con) {
     }
     echo "</table>";
     
+    echo "<a href='../views/cesta.php'> Vés a la cistella >></a><br>";
+    
     // TERMINATES
     $stmt->free_result();
     $con->close();
