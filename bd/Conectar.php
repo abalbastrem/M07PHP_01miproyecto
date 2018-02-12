@@ -2,7 +2,7 @@
 
 class Conectar{
 
-    private $host, $user, $pass, $db;
+    private $host, $user, $pass, $db, $dbname, $dsn;
 
     public function __construct(){
         $config  = require_once '../config/config.php';
