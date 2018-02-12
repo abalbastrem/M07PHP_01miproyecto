@@ -16,7 +16,7 @@ function producto2cesta($cesta,$con) {
     
     echo "producto añadido.<br>";
     echo "<a href='../views/productos.php'><< Torna a la taula de productes</a><br>";
-    echo "<a href='../views/cesta.php'><< Vés a la cistella</a><br>";
+    echo "<a href='../views/cesta.php'>Vés a la cistella >></a><br>";
 }
 
 function getCesta($con) {
